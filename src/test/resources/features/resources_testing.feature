@@ -10,10 +10,10 @@ Feature: Resources testing CRUD
     And validates the response with resources list JSON schema
     And deletes the created resources
 
-  # Test Case 3
+  # Test Case 4
   @smoke
   Scenario: Update the last resource
-    Given there are at least 1 registered resources on the system
+    Given there are at least 5 registered resources on the system
     And I retrieve the details of the latest resource
     When I send a PUT request to update the latest resource with the following details:
       | name        | trademark | stock | price | description   | tags    | active |

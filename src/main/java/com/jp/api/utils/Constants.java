@@ -13,6 +13,7 @@ public class Constants {
     public static final String PATH_CLIENT_SCHEMA = "schemas/clientSchema.json";
     public static final String PATH_RESOURCE_LIST_SCHEMA = "schemas/resourcesListSchema.json";
     public static final String PATH_RESOURCE_SCHEMA = "schemas/resourceSchema.json";
+    public static final double DELTA = 0.000000000000001;
 
     private Constants() {
     }

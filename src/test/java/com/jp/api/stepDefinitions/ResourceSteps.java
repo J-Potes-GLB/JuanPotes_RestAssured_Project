@@ -91,6 +91,8 @@ public class ResourceSteps {
         List<Resource> resourcesRegistered = resourceRequest.getResourcesEntity(response);
 
         lastResource = resourcesRegistered.get(resourcesRegistered.size() - 1);
+
+        logger.info("Original details: " + lastResource);
     }
 
     @When("I send a PUT request to update the latest resource with the following details:")
@@ -113,12 +115,13 @@ public class ResourceSteps {
     @And("the response should have the same resource details that were sent")
     public void theResponseShouldHaveTheSameResourceDetailsThatWereSent() {
         resourceResponded = resourceRequest.getResourceEntity(response);
+        logger.info("Details in response: " + resourceResponded);
 
         Assert.assertEquals(resourceGiven.getId(), resourceResponded.getId());
         Assert.assertEquals(resourceGiven.getName(), resourceResponded.getName());
         Assert.assertEquals(resourceGiven.getTrademark(), resourceResponded.getTrademark());
         Assert.assertEquals(resourceGiven.getStock(), resourceResponded.getStock());
-        Assert.assertEquals(resourceGiven.getPrice(), resourceResponded.getPrice());
+        Assert.assertEquals(resourceGiven.getPrice(), resourceResponded.getPrice(), Constants.DELTA);
         Assert.assertEquals(resourceGiven.getDescription(), resourceResponded.getDescription());
         Assert.assertEquals(resourceGiven.getTags(), resourceResponded.getTags());
         Assert.assertEquals(resourceGiven.getActive(), resourceResponded.getActive());
@@ -128,5 +131,7 @@ public class ResourceSteps {
 
     @And("validates the response with resources JSON schema")
     public void validatesTheResponseWithResourcesJSONSchema() {
+        Assert.assertTrue(resourceRequest.validateSchema(response, Constants.PATH_RESOURCE_SCHEMA));
+        logger.info("The schema was validated successfully");
     }
 }
