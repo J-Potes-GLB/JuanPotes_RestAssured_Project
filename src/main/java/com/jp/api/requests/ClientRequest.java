@@ -62,16 +62,4 @@ public class ClientRequest extends BaseRequest{
         Gson gson = new Gson();
         return gson.fromJson(clientJson, Client.class);
     }
-
-    public boolean validateSchema(Response response, String schemaPath) {
-        try {
-            response.then()
-                    .assertThat()
-                    .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(schemaPath));
-            return true; // Return true if the assertion passes
-        } catch (AssertionError e) {
-            // Assertion failed, return false
-            return false;
-        }
-    }
 }

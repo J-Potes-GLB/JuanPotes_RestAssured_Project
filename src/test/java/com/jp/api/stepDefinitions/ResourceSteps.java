@@ -26,8 +26,6 @@ public class ResourceSteps {
 
     @Given("there are at least {int} registered resource on the system")
     public void thereAreRegisteredResourcesOnTheSystem(int minNumberOfResourcesRegistered){
-
-
     }
 
     @When("I send a GET request to view all the resources")
