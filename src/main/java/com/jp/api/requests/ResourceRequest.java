@@ -1,6 +1,5 @@
 package com.jp.api.requests;
 
-import com.jp.api.models.Client;
 import com.jp.api.models.Resource;
 import com.jp.api.utils.Constants;
 import io.restassured.path.json.JsonPath;
@@ -30,6 +29,11 @@ public class ResourceRequest extends BaseRequest{
     public Response deleteResource(String resourceId) {
         endpoint = String.format(Constants.URL_WITH_PARAM, Constants.RESOURCES_PATH, resourceId);
         return requestDelete(endpoint, createBaseHeaders());
+    }
+
+    public Response updateResource(Resource resource, String resourceId) {
+        endpoint = String.format(Constants.URL_WITH_PARAM, Constants.RESOURCES_PATH, resourceId);
+        return requestPut(endpoint, createBaseHeaders(), resource);
     }
 
     public Resource getResourceEntity(@NotNull Response response) {

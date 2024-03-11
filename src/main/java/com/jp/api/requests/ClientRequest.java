@@ -3,8 +3,6 @@ package com.jp.api.requests;
 import com.google.gson.Gson;
 import com.jp.api.models.Client;
 import com.jp.api.utils.Constants;
-import com.jp.api.utils.JsonFileReader;
-import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.jetbrains.annotations.NotNull;
@@ -51,11 +49,6 @@ public class ClientRequest extends BaseRequest{
     public List<Client> getClientsEntity(@NotNull Response response) {
         JsonPath jsonPath = response.jsonPath();
         return jsonPath.getList("", Client.class);
-    }
-
-    public Response createDefaultClient() {
-        JsonFileReader jsonFile = new JsonFileReader();
-        return this.createClient(jsonFile.getClientByJson(Constants.DEFAULT_CLIENT_FILE_PATH));
     }
 
     public Client getClientEntity(String clientJson) {
