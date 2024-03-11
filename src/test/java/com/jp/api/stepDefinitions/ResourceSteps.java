@@ -1,6 +1,5 @@
 package com.jp.api.stepDefinitions;
 
-import com.jp.api.models.Client;
 import com.jp.api.models.Resource;
 import com.jp.api.requests.ResourceRequest;
 import com.jp.api.utils.Constants;

@@ -1,6 +1,5 @@
 package com.jp.api.requests;
 
-import com.jp.api.models.Client;
 import com.jp.api.models.Resource;
 import com.jp.api.utils.Constants;
 import io.restassured.path.json.JsonPath;
