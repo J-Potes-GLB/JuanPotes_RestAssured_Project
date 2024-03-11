@@ -8,6 +8,7 @@ Feature: Client testing CRUD
     When I send a GET request to view all the clients
     Then the response should have a status code of 200
     And validates the response with client list JSON schema
+    And deletes the created clients
 
   # Test case 3
   @smoke
@@ -19,3 +20,4 @@ Feature: Client testing CRUD
     Then the response should have a status code of 201
     And the response details should be the same as the client
     And validates the response with the client JSON schema
+    And deletes the created clients

@@ -25,8 +25,13 @@ public class ClientRequest extends BaseRequest{
     }
 
     public Response createClient(Client client) {
-        endpoint = "";
+        endpoint = String.format(Constants.URL, Constants.CLIENTS_PATH);
         return requestPost(endpoint, createBaseHeaders(), client);
+    }
+
+    public Response createTestClient() {
+        endpoint = String.format(Constants.URL, Constants.CLIENTS_PATH);
+        return requestPost(endpoint, createBaseHeaders());
     }
 
     public Response updateClient(Client client, String clientId) {
@@ -35,7 +40,7 @@ public class ClientRequest extends BaseRequest{
     }
 
     public Response deleteClient(String clientId) {
-        endpoint = "";
+        endpoint = String.format(Constants.URL_WITH_PARAM, Constants.CLIENTS_PATH, clientId);
         return requestDelete(endpoint, createBaseHeaders());
     }
 
