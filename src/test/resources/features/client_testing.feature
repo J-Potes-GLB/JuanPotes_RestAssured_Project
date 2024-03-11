@@ -19,3 +19,4 @@ Feature: Client testing CRUD
     Then the response should have a status code of 201
     And the response details should be the same as the client
     And validates the response with the client JSON schema
+    And deletes the created clients
