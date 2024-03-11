@@ -14,7 +14,7 @@ Feature: Resources testing CRUD
   @smoke
   Scenario: Update the last resource
     Given there are at least 1 registered resources on the system
-    And I retreive the details of the latest resource
+    And I retrieve the details of the latest resource
     When I send a PUT request to update the latest resource with the following details:
       | name        | trademark | stock | price | description   | tags    | active |
       | JP Resource | Globant   | 20    | 50.25 | Test resource | quality | false  |

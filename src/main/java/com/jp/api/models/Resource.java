@@ -19,4 +19,7 @@ public class Resource {
     private boolean active;
     private String id;
 
+    public boolean getActive() {
+        return active;
+    }
 }

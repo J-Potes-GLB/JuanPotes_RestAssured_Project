@@ -1,8 +1,10 @@
 package com.jp.api.stepDefinitions;
 
+import com.jp.api.models.Client;
 import com.jp.api.models.Resource;
 import com.jp.api.requests.ResourceRequest;
 import com.jp.api.utils.Constants;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,6 +16,7 @@ import org.junit.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ResourceSteps {
     private static final Logger logger = LogManager.getLogger(ResourceSteps.class);
@@ -23,6 +26,7 @@ public class ResourceSteps {
     private Response response;
     private Resource resourceResponded;
     private Resource resourceGiven;
+    private Resource lastResource;
     private List<String> createdResourcesIds = new ArrayList<String>();
 
     @Given("there are at least {int} registered resources on the system")
@@ -79,5 +83,50 @@ public class ResourceSteps {
                 logger.info("Resource of id '"  + resourceResponded.getId() + "' was deleted successfully");
             }
         }
+    }
+
+    @And("I retrieve the details of the latest resource")
+    public void iRetrieveTheDetailsOfTheLatestResource() {
+        response = resourceRequest.getResources();
+        List<Resource> resourcesRegistered = resourceRequest.getResourcesEntity(response);
+
+        lastResource = resourcesRegistered.get(resourcesRegistered.size() - 1);
+    }
+
+    @When("I send a PUT request to update the latest resource with the following details:")
+    public void iSendAPUTRequestToUpdateTheLatestResourceWithTheFollowingDetails(DataTable clientData) {
+        Map<String, String> resourceDataMap = clientData.asMaps().get(0);
+        resourceGiven = new Resource(resourceDataMap.get("name"),
+                resourceDataMap.get("trademark"),
+                Integer.parseInt(resourceDataMap.get("stock")),
+                Double.parseDouble(resourceDataMap.get("price")),
+                resourceDataMap.get("description"),
+                resourceDataMap.get("tags"),
+                Boolean.parseBoolean(resourceDataMap.get("active")),
+                lastResource.getId());
+        logger.info("Details to send: " + resourceGiven);
+
+        response = resourceRequest.updateResource(resourceGiven, lastResource.getId());
+        logger.info("PUT request sent, resource updated");
+    }
+
+    @And("the response should have the same resource details that were sent")
+    public void theResponseShouldHaveTheSameResourceDetailsThatWereSent() {
+        resourceResponded = resourceRequest.getResourceEntity(response);
+
+        Assert.assertEquals(resourceGiven.getId(), resourceResponded.getId());
+        Assert.assertEquals(resourceGiven.getName(), resourceResponded.getName());
+        Assert.assertEquals(resourceGiven.getTrademark(), resourceResponded.getTrademark());
+        Assert.assertEquals(resourceGiven.getStock(), resourceResponded.getStock());
+        Assert.assertEquals(resourceGiven.getPrice(), resourceResponded.getPrice());
+        Assert.assertEquals(resourceGiven.getDescription(), resourceResponded.getDescription());
+        Assert.assertEquals(resourceGiven.getTags(), resourceResponded.getTags());
+        Assert.assertEquals(resourceGiven.getActive(), resourceResponded.getActive());
+
+        logger.info("The resource details in the response are the same as the details sent in the PUT request");
+    }
+
+    @And("validates the response with resources JSON schema")
+    public void validatesTheResponseWithResourcesJSONSchema() {
     }
 }

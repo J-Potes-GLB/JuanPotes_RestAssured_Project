@@ -32,6 +32,11 @@ public class ResourceRequest extends BaseRequest{
         return requestDelete(endpoint, createBaseHeaders());
     }
 
+    public Response updateResource(Resource resource, String resourceId) {
+        endpoint = String.format(Constants.URL_WITH_PARAM, Constants.RESOURCES_PATH, resourceId);
+        return requestPut(endpoint, createBaseHeaders(), resource);
+    }
+
     public Resource getResourceEntity(@NotNull Response response) {
         return response.as(Resource.class);
     }
