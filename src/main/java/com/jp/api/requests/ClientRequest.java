@@ -18,7 +18,7 @@ public class ClientRequest extends BaseRequest{
     }
 
     public Response getClient(String clientId) {
-        endpoint = "";
+        endpoint = String.format(Constants.URL_WITH_PARAM, Constants.CLIENTS_PATH, clientId);
         return requestGet(endpoint, createBaseHeaders());
     }
 
@@ -33,7 +33,7 @@ public class ClientRequest extends BaseRequest{
     }
 
     public Response updateClient(Client client, String clientId) {
-        endpoint = "";
+        endpoint = String.format(Constants.URL_WITH_PARAM, Constants.CLIENTS_PATH, clientId);
         return requestPut(endpoint, createBaseHeaders(), client);
     }
 
