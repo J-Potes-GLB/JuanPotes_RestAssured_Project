@@ -3,6 +3,7 @@ package com.jp.api.stepDefinitions;
 import com.jp.api.models.Client;
 import com.jp.api.requests.ClientRequest;
 import com.jp.api.utils.Constants;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -49,5 +50,22 @@ public class ClientSteps {
     public void validatesTheResponseWithClientListJSONSchema() {
         Assert.assertTrue(clientRequest.validateSchema(response, Constants.PATH_CLIENT_LIST_SCHEMA));
         logger.info("The schema was validated successfully");
+    }
+
+    @Given("I have a client with the following details:")
+    public void iHaveAClientWithTheFollowingDetails(DataTable clientData) {
+    }
+
+    @When("I send a POST request to create a client")
+    public void iSendAPOSTRequestToCreateAClient() {
+    }
+
+    @And("the response details should be the same as the client")
+    public void theResponseDetailsShouldBeTheSameAsTheClient() {
+    }
+
+    @And("validates the response with the client JSON schema")
+    public void validatesTheResponseWithTheClientJSONSchema() {
+
     }
 }
