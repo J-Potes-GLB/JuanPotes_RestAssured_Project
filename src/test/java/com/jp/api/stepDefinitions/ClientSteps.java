@@ -142,7 +142,7 @@ public class ClientSteps {
 
             // The loop gets executed for every client that was created in the test
             for(int i = 0; i < size; i++){
-                // Delete first client of the new clients and serialize response.
+                // Delete first client of the new clients and serialize response
                 response = clientRequest.deleteClient(createdClientsIds.get(0));
                 clientResponded = clientRequest.getClientEntity(response);
 

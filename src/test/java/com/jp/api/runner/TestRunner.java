@@ -4,6 +4,7 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
+// Class that allows us tu run the tests
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features",
