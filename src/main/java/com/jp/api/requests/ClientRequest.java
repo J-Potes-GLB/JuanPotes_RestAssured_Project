@@ -15,7 +15,7 @@ public class ClientRequest extends BaseRequest{
     private String endpoint;
 
     public Response getClients() {
-        endpoint = "";
+        endpoint = String.format(Constants.URL, Constants.CLIENTS_PATH);
         return requestGet(endpoint, createBaseHeaders());
     }
 
