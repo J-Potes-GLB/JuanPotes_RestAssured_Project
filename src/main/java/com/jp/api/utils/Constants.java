@@ -11,6 +11,7 @@ public class Constants {
     public static final  String URL_WITH_PARAM           = "/api/v1/%s/%s";
     public static final String PATH_CLIENT_LIST_SCHEMA = "schemas/clientListSchema.json";
     public static final String PATH_CLIENT_SCHEMA = "schemas/clientSchema.json";
+    public static final String PATH_RESOURCE_LIST_SCHEMA = "schemas/resourcesListSchema.json";
 
     private Constants() {
     }
