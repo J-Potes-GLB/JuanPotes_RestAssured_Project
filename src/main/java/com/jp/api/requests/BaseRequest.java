@@ -9,6 +9,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BaseRequest {
+    /**
+     * This is a function to get a response from an endpoint using rest assured
+     * @param endpoint api url (optional inclusion of id)
+     * @param headers a map of headers
+     * @return Response
+     */
     protected Response requestGet(String endpoint, Map<String, ?> headers) {
         return RestAssured.given()
                 .contentType(Constants.VALUE_CONTENT_TYPE)
@@ -18,7 +24,7 @@ public class BaseRequest {
     }
 
     /**
-     * This is a funtion to create a new element using rest assured
+     * This is a function to create a new element with a specific body using rest assured
      * @param endpoint api url
      * @param headers a map of headers
      * @param body model object
@@ -33,6 +39,12 @@ public class BaseRequest {
                 .post(endpoint);
     }
 
+    /**
+     * This is a function to create a generic new element using rest assured
+     * @param endpoint api url
+     * @param headers a map of headers
+     * @return Response
+     */
     protected Response requestPost(String endpoint, Map<String, ?> headers) {
         return RestAssured.given()
                 .contentType(Constants.VALUE_CONTENT_TYPE)
@@ -41,6 +53,13 @@ public class BaseRequest {
                 .post(endpoint);
     }
 
+    /**
+     * This is a function to update an element sending a specific body using rest assured
+     * @param endpoint api url with the id of the element to update
+     * @param headers a map of headers
+     * @param body model object
+     * @return Response
+     */
     protected Response requestPut(String endpoint, Map<String, ?> headers, Object body) {
         return RestAssured.given()
                 .contentType(Constants.VALUE_CONTENT_TYPE)
@@ -50,6 +69,12 @@ public class BaseRequest {
                 .put(endpoint);
     }
 
+    /**
+     * This is a function to delete an element sending a specific body using rest assured
+     * @param endpoint api url with the id of the element to delete
+     * @param headers a map of headers
+     * @return Response
+     */
     protected Response requestDelete(String endpoint, Map<String, ?> headers) {
         return RestAssured.given()
                 .contentType(Constants.VALUE_CONTENT_TYPE)
@@ -58,12 +83,22 @@ public class BaseRequest {
                 .delete(endpoint);
     }
 
+    /**
+     * This is a function that creates and returns the base headers for the requests
+     * @return Map with the headers
+     */
     protected Map<String, String> createBaseHeaders() {
         Map<String, String> headers = new HashMap<>();
         headers.put(Constants.CONTENT_TYPE, Constants.VALUE_CONTENT_TYPE);
         return headers;
     }
 
+    /**
+     * This function compares the schema of a response with a schema defined in the project
+     * @param response the response to compare
+     * @param schemaPath the path from source root of the schema
+     * @return
+     */
     public boolean validateSchema(Response response, String schemaPath) {
         try {
             response.then()
