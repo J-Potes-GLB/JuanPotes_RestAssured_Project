@@ -25,7 +25,7 @@ public class ResourceSteps {
     private Resource resourceGiven;
     private List<String> createdResourcesIds = new ArrayList<String>();
 
-    @Given("there are at least {int} registered resource on the system")
+    @Given("there are at least {int} registered resources on the system")
     public void thereAreRegisteredResourcesOnTheSystem(int minNumberOfResourcesRegistered){
         response = resourceRequest.getResources();
         List<Resource> resourcesRegistered = resourceRequest.getResourcesEntity(response);
