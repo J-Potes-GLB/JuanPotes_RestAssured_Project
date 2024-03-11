@@ -38,8 +38,8 @@ API base URL: "https://63b6dfe11907f863aa04ff81.mockapi.io"
 
 ### Scenario 3: Create a new client
 
-**Given** I have a client with the following details:
-      | Name | LastName | Country  | City   | Email           | Phone       |
+**Given** I have a client with the following details:<br>
+      | Name | LastName | Country  | City   | Email           | Phone       |<br>
       | Juan | Potes    | Colombia | Bogota | testJP@test.com | 123-456-789 |
 
 **When** I send a POST request to create a client
@@ -57,8 +57,8 @@ API base URL: "https://63b6dfe11907f863aa04ff81.mockapi.io"
 
 **And** I retrieve the details of the latest resource
 
-**When** I send a PUT request to update the latest resource with the following details:
-      | name        | trademark | stock | price | description   | tags    | active |
+**When** I send a PUT request to update the latest resource with the following details:<br>
+      | name        | trademark | stock | price | description   | tags    | active |<br>
       | JP Resource | Globant   | 20    | 50.25 | Test resource | quality | false  |
 
 **Then** the response of resource should have a status code of 200
