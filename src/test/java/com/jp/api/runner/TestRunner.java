@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue = "com.testing.api.stepDefinitions",
+        glue = "com.jp.api.stepDefinitions",
         snippets = CucumberOptions.SnippetType.CAMELCASE,
         monochrome = true,
         tags = "@active and @smoke",

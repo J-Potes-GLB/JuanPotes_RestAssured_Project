@@ -1,6 +1,9 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
   "type": "array",
   "items": {
+    "type": "object",
     "properties": {
       "name": {
         "type": "string"
@@ -8,13 +11,16 @@
       "lastName": {
         "type": "string"
       },
-      "gender": {
-        "type": "string"
-      },
       "country": {
         "type": "string"
       },
       "city": {
+        "type": "string"
+      },
+      "email": {
+        "type": "string"
+      },
+      "phone": {
         "type": "string"
       },
       "id": {
@@ -24,9 +30,10 @@
     "required": [
       "name",
       "lastName",
-      "gender",
       "country",
       "city",
+      "email",
+      "phone",
       "id"
     ]
   }
