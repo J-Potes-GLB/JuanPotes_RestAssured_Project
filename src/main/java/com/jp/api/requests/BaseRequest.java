@@ -32,6 +32,14 @@ public class BaseRequest {
                 .post(endpoint);
     }
 
+    protected Response requestPost(String endpoint, Map<String, ?> headers) {
+        return RestAssured.given()
+                .contentType(Constants.VALUE_CONTENT_TYPE)
+                .headers(headers)
+                .when()
+                .post(endpoint);
+    }
+
     protected Response requestPut(String endpoint, Map<String, ?> headers, Object body) {
         return RestAssured.given()
                 .contentType(Constants.VALUE_CONTENT_TYPE)

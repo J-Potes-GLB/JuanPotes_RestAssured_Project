@@ -29,6 +29,11 @@ public class ClientRequest extends BaseRequest{
         return requestPost(endpoint, createBaseHeaders(), client);
     }
 
+    public Response createTestClient() {
+        endpoint = String.format(Constants.URL, Constants.CLIENTS_PATH);
+        return requestPost(endpoint, createBaseHeaders());
+    }
+
     public Response updateClient(Client client, String clientId) {
         endpoint = "";
         return requestPut(endpoint, createBaseHeaders(), client);

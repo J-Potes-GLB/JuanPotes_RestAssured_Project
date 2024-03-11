@@ -28,11 +28,24 @@ public class ClientSteps {
     private List<String> createdClientsIds = new ArrayList<String>();
 
     @Given("there are at least {int} registered clients on the system")
-    public void thereAreRegisteredClientsOnTheSystem(int numberOfClientsRegistered){
+    public void thereAreRegisteredClientsOnTheSystem(int minNumberOfClientsRegistered){
         response = clientRequest.getClients();
         List<Client> clientsRegistered = clientRequest.getClientsEntity(response);
         int size = clientsRegistered.size();
-        logger.info("Number of registered clients: " + size);
+        logger.info("Minimum number of registered clients required: " + minNumberOfClientsRegistered);
+        logger.info("Number of original registered clients: " + size);
+
+        Response auxiliarResponse;
+        Client auxiliarClient;
+        if(size < minNumberOfClientsRegistered){
+            int clientsToAdd = minNumberOfClientsRegistered - size;
+            for(int i = 0; i < clientsToAdd; i++){
+                auxiliarResponse = clientRequest.createTestClient();
+                auxiliarClient = clientRequest.getClientEntity(auxiliarResponse);
+                createdClientsIds.add(auxiliarClient.getId());
+                logger.info("New client of id '" + auxiliarClient.getId() + "' was created");
+            }
+        }
     }
 
     @When("I send a GET request to view all the clients")
@@ -74,7 +87,7 @@ public class ClientSteps {
         logger.info("New client created");
 
         clientResponded = clientRequest.getClientEntity(response);
-        logger.info(clientResponded);
+        logger.info("Client in response: " + clientResponded);
 
         createdClientsIds.add(clientResponded.getId());
     }
@@ -88,7 +101,7 @@ public class ClientSteps {
         Assert.assertEquals(clientGiven.getEmail(), clientResponded.getEmail());
         Assert.assertEquals(clientGiven.getPhone(), clientResponded.getPhone());
 
-        logger.info("The client details in the respond is the same as the data sent");
+        logger.info("The client details in the response are the same as the details sent");
     }
 
     @And("validates the response with the client JSON schema")
@@ -102,7 +115,8 @@ public class ClientSteps {
     public void deletesTheCreatedClients() {
         if(!createdClientsIds.isEmpty()){
             logger.info("CLEAN UP OF CREATED CLIENTS");
-            for(int i = 0; i < createdClientsIds.size(); i++){
+            int size = createdClientsIds.size();
+            for(int i = 0; i < size; i++){
                 response = clientRequest.deleteClient(createdClientsIds.get(0));
                 clientResponded = clientRequest.getClientEntity(response);
 
