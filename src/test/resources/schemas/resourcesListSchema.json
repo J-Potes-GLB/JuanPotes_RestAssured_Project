@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "trademark": {
+        "type": "string"
+      },
+      "stock": {
+        "type": "number"
+      },
+      "price": {
+        "type": "number"
+      },
+      "description": {
+        "type": "string"
+      },
+      "tags": {
+        "type": "string"
+      },
+      "active": {
+        "type": "boolean"
+      },
+      "id": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "name",
+      "trademark",
+      "stock",
+      "price",
+      "description",
+      "tags",
+      "active",
+      "id"
+    ]
+  }
+}
