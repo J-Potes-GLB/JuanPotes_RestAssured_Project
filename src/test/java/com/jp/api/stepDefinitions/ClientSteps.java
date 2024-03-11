@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 
 import java.util.List;
+import java.util.Map;
 
 public class ClientSteps {
     private static final Logger logger = LogManager.getLogger(ClientSteps.class);
@@ -54,6 +55,16 @@ public class ClientSteps {
 
     @Given("I have a client with the following details:")
     public void iHaveAClientWithTheFollowingDetails(DataTable clientData) {
+        Map<String, String> clientDataMap = clientData.asMaps().get(0);
+
+        client = new Client(clientDataMap.get("Name"),
+                clientDataMap.get("LastName"),
+                clientDataMap.get("Country"),
+                clientDataMap.get("City"),
+                clientDataMap.get("Email"),
+                clientDataMap.get("Phone"));
+
+        logger.info("Client to add: " + client);
     }
 
     @When("I send a POST request to create a client")
